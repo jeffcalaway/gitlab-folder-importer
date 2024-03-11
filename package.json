@@ -1,0 +1,66 @@
+{
+    "name": "gitlab-folder-importer",
+    "displayName": "GitLab Folder Importer",
+    "description": "\"GitLab Folder Importer\" is a powerful Visual Studio Code extension designed to streamline the development workflow by enabling direct integration with GitLab repositories. This extension allows developers to seamlessly import components or entire folders from a specified GitLab repository into their current project with just a few clicks.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.87.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:gitlabFolderImporter.insertComponent",
+        "onStartupFinished"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "gitlabFolderImporter.insertComponent",
+                "title": "Insert Component"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "resourceFolder",
+                    "command": "gitlabFolderImporter.insertComponent",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "configuration": {
+            "title": "GitLab Folder Importer",
+            "properties": {
+                "gitlabFolderImporter.repositoryUrl": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Full HTTP URL to the GitLab Repository (e.g., https://gitlab.com[...].git)"
+                },
+                "gitlabFolderImporter.accessToken": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Access token for the GitLab repository (if required)."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.87.0",
+        "@types/mocha": "^10.0.6",
+        "@types/node": "18.x",
+        "eslint": "^8.56.0",
+        "typescript": "^5.3.3",
+        "@vscode/test-cli": "^0.0.6",
+        "@vscode/test-electron": "^2.3.9"
+    },
+    "dependencies": {
+        "axios": "^1.6.7"
+    }
+}
